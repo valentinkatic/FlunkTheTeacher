@@ -9,12 +9,11 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec349d90-fac5-477a-a67c-496978a3e16e" name="Default" comment="sredjivanje koda">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/katic/flunktheteacher/GameActivity.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/java/com/katic/flunktheteacher/TitleView.java" afterPath="" />
+    <list default="true" id="ec349d90-fac5-477a-a67c-496978a3e16e" name="Default" comment="upload slika">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/katic/flunktheteacher/GameView.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/katic/flunktheteacher/GameView.java" />
@@ -37,7 +36,7 @@
     <favorites_list name="FlunkTheTeacher" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8578017">
+    <splitter split-orientation="horizontal" split-proportion="0.79569894">
       <split-first>
         <leaf>
           <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
@@ -56,19 +55,19 @@
           <file leaf-file-name="GameView.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/src/main/java/com/katic/flunktheteacher/GameView.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.17045455">
-                  <caret line="126" column="61" selection-start-line="126" selection-start-column="61" selection-end-line="126" selection-end-column="61" />
+                <state vertical-scroll-proportion="0.33333334">
+                  <caret line="128" column="28" selection-start-line="128" selection-start-column="21" selection-end-line="128" selection-end-column="28" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#2435#2436#0" expanded="true" />
                     <element signature="e#2464#2465#0" expanded="true" />
                     <element signature="e#2471#2503#1" expanded="true" />
-                    <element signature="e#15841#15842#0" expanded="true" />
-                    <element signature="e#15876#15877#0" expanded="true" />
-                    <element signature="e#25951#25952#0" expanded="true" />
-                    <element signature="e#26000#26001#0" expanded="true" />
-                    <element signature="e#26429#26430#0" expanded="true" />
-                    <element signature="e#26469#26470#0" expanded="true" />
+                    <element signature="e#15738#15739#0" expanded="true" />
+                    <element signature="e#15773#15774#0" expanded="true" />
+                    <element signature="e#25848#25849#0" expanded="true" />
+                    <element signature="e#25897#25898#0" expanded="true" />
+                    <element signature="e#26326#26327#0" expanded="true" />
+                    <element signature="e#26366#26367#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -1766,6 +1765,42 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FlunkTheTeacher" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FlunkTheTeacher" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
@@ -2177,12 +2212,12 @@
             <element signature="e#2435#2436#0" expanded="true" />
             <element signature="e#2464#2465#0" expanded="true" />
             <element signature="e#2471#2503#1" expanded="true" />
-            <element signature="e#15841#15842#0" expanded="true" />
-            <element signature="e#15876#15877#0" expanded="true" />
-            <element signature="e#25951#25952#0" expanded="true" />
-            <element signature="e#26000#26001#0" expanded="true" />
-            <element signature="e#26429#26430#0" expanded="true" />
-            <element signature="e#26469#26470#0" expanded="true" />
+            <element signature="e#15738#15739#0" expanded="true" />
+            <element signature="e#15773#15774#0" expanded="true" />
+            <element signature="e#25848#25849#0" expanded="true" />
+            <element signature="e#25897#25898#0" expanded="true" />
+            <element signature="e#26326#26327#0" expanded="true" />
+            <element signature="e#26366#26367#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2305,21 +2340,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/background.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/katic/flunktheteacher/GameView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17045455">
-          <caret line="126" column="61" selection-start-line="126" selection-start-column="61" selection-end-line="126" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="128" column="28" selection-start-line="128" selection-start-column="21" selection-end-line="128" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2435#2436#0" expanded="true" />
             <element signature="e#2464#2465#0" expanded="true" />
             <element signature="e#2471#2503#1" expanded="true" />
-            <element signature="e#15841#15842#0" expanded="true" />
-            <element signature="e#15876#15877#0" expanded="true" />
-            <element signature="e#25951#25952#0" expanded="true" />
-            <element signature="e#26000#26001#0" expanded="true" />
-            <element signature="e#26429#26430#0" expanded="true" />
-            <element signature="e#26469#26470#0" expanded="true" />
+            <element signature="e#15738#15739#0" expanded="true" />
+            <element signature="e#15773#15774#0" expanded="true" />
+            <element signature="e#25848#25849#0" expanded="true" />
+            <element signature="e#25897#25898#0" expanded="true" />
+            <element signature="e#26326#26327#0" expanded="true" />
+            <element signature="e#26366#26367#0" expanded="true" />
           </folding>
         </state>
       </provider>

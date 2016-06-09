@@ -94,7 +94,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             myContext = context;
             backgroundImg = BitmapFactory.decodeResource(context.getResources(), R.drawable.title);
             playButtonUp = BitmapFactory.decodeResource(getResources(), R.drawable.play_button_up);
-            playButtonDown = BitmapFactory.decodeResource(getResources(), R.drawable.play_button_down);
+
             backgroundOrigW = backgroundImg.getWidth();
             backgroundOrigH = backgroundImg.getHeight();
             sounds = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
