@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MainView mainView;
+    private GameView gameView;
 
     private static final int TOGGLE_SOUND = 1;
     private boolean soundEnabled = true;
@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_main);
-        mainView = (MainView) findViewById(R.id.head);
+        gameView = (GameView) findViewById(R.id.head);
 
-        mainView.setKeepScreenOn(true);
+        gameView.setKeepScreenOn(true);
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
     }
@@ -49,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
                 String soundEnabledText = "Sound On";
                 if (soundEnabled) {
                     soundEnabled = false;
-                    mainView.soundOn = false;
+                    gameView.soundOn = false;
                     soundEnabledText = "Sound Off";
                 } else {
                     soundEnabled = true;
-                    mainView.soundOn = true;
+                    gameView.soundOn = true;
                 }
                 Toast.makeText(this, soundEnabledText, Toast.LENGTH_SHORT).show();
                 break;
