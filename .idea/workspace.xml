@@ -9,15 +9,17 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec349d90-fac5-477a-a67c-496978a3e16e" name="Default" comment="upload slika">
+    <list default="true" id="ec349d90-fac5-477a-a67c-496978a3e16e" name="Default" comment="uredjivanje title screena">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/gameover.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/gameover.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/play_button_up.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/play_button_up.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/score_button_up.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/score_button_up.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/settings_button_up.png" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/settings_button_up.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/katic/flunktheteacher/GameView.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/katic/flunktheteacher/GameView.java" />
     </list>
@@ -39,7 +41,7 @@
     <favorites_list name="FlunkTheTeacher" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.79569894">
+    <splitter split-orientation="horizontal" split-proportion="0.5952381">
       <split-first>
         <leaf>
           <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
@@ -58,22 +60,19 @@
           <file leaf-file-name="GameView.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/src/main/java/com/katic/flunktheteacher/GameView.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.35416666">
-                  <caret line="373" column="79" selection-start-line="373" selection-start-column="79" selection-end-line="373" selection-end-column="79" />
+                <state vertical-scroll-proportion="0.38825756">
+                  <caret line="145" column="24" selection-start-line="145" selection-start-column="24" selection-end-line="145" selection-end-column="24" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#2581#2582#0" expanded="true" />
-                    <element signature="e#2610#2611#0" expanded="true" />
-                    <element signature="e#2617#2649#1" expanded="true" />
-                    <element signature="e#12171#12172#0" expanded="true" />
-                    <element signature="e#12206#12207#0" expanded="true" />
-                    <element signature="method#pickActiveHead#0;class#FlunkTheTeacherThread#0;class#GameView#0" expanded="false" />
-                    <element signature="method#detectHeadContact#0;class#FlunkTheTeacherThread#0;class#GameView#0" expanded="false" />
-                    <element signature="method#animateHeads#0;class#FlunkTheTeacherThread#0;class#GameView#0" expanded="false" />
-                    <element signature="e#27366#27367#0" expanded="true" />
-                    <element signature="e#27415#27416#0" expanded="true" />
-                    <element signature="e#27844#27845#0" expanded="true" />
-                    <element signature="e#27884#27885#0" expanded="true" />
+                    <element signature="e#2727#2728#0" expanded="true" />
+                    <element signature="e#2756#2757#0" expanded="true" />
+                    <element signature="e#2763#2795#1" expanded="true" />
+                    <element signature="e#14402#14403#0" expanded="true" />
+                    <element signature="e#14437#14438#0" expanded="true" />
+                    <element signature="e#29552#29553#0" expanded="true" />
+                    <element signature="e#29601#29602#0" expanded="true" />
+                    <element signature="e#30030#30031#0" expanded="true" />
+                    <element signature="e#30070#30071#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -96,8 +95,8 @@
           <file leaf-file-name="TitleView.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/../../CrazyEights/app/src/main/java/com/dummies/androidgame/crazyeights/TitleView.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.76301616">
-                  <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.6947935">
+                  <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
                   <folding />
                 </state>
               </provider>
@@ -2143,7 +2142,13 @@
       <option name="project" value="LOCAL" />
       <updated>1465481540250</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="uredjivanje title screena">
+      <created>1465489777602</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1465489777602</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2185,7 +2190,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="sredjivanje koda" />
-    <option name="LAST_COMMIT_MESSAGE" value="sredjivanje koda" />
+    <MESSAGE value="uredjivanje title screena" />
+    <option name="LAST_COMMIT_MESSAGE" value="uredjivanje title screena" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -2193,7 +2199,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/katic/flunktheteacher/GameView.java</url>
-          <line>283</line>
+          <line>327</line>
           <properties />
         </line-breakpoint>
       </breakpoints>
@@ -2219,18 +2225,15 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2581#2582#0" expanded="true" />
-            <element signature="e#2610#2611#0" expanded="true" />
-            <element signature="e#2617#2649#1" expanded="true" />
-            <element signature="e#12171#12172#0" expanded="true" />
-            <element signature="e#12206#12207#0" expanded="true" />
-            <element signature="method#pickActiveHead#0;class#FlunkTheTeacherThread#0;class#GameView#0" expanded="false" />
-            <element signature="method#detectHeadContact#0;class#FlunkTheTeacherThread#0;class#GameView#0" expanded="false" />
-            <element signature="method#animateHeads#0;class#FlunkTheTeacherThread#0;class#GameView#0" expanded="false" />
-            <element signature="e#27366#27367#0" expanded="true" />
-            <element signature="e#27415#27416#0" expanded="true" />
-            <element signature="e#27844#27845#0" expanded="true" />
-            <element signature="e#27884#27885#0" expanded="true" />
+            <element signature="e#2727#2728#0" expanded="true" />
+            <element signature="e#2756#2757#0" expanded="true" />
+            <element signature="e#2763#2795#1" expanded="true" />
+            <element signature="e#14402#14403#0" expanded="true" />
+            <element signature="e#14437#14438#0" expanded="true" />
+            <element signature="e#29552#29553#0" expanded="true" />
+            <element signature="e#29601#29602#0" expanded="true" />
+            <element signature="e#30030#30031#0" expanded="true" />
+            <element signature="e#30070#30071#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2318,14 +2321,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../CrazyEights/app/src/main/java/com/dummies/androidgame/crazyeights/TitleView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.76301616">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.70433146">
@@ -2358,24 +2353,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../CrazyEights/app/src/main/java/com/dummies/androidgame/crazyeights/TitleView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6947935">
+          <caret line="73" column="25" selection-start-line="73" selection-start-column="25" selection-end-line="73" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/katic/flunktheteacher/GameView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35416666">
-          <caret line="373" column="79" selection-start-line="373" selection-start-column="79" selection-end-line="373" selection-end-column="79" />
+        <state vertical-scroll-proportion="0.38825756">
+          <caret line="145" column="24" selection-start-line="145" selection-start-column="24" selection-end-line="145" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2581#2582#0" expanded="true" />
-            <element signature="e#2610#2611#0" expanded="true" />
-            <element signature="e#2617#2649#1" expanded="true" />
-            <element signature="e#12171#12172#0" expanded="true" />
-            <element signature="e#12206#12207#0" expanded="true" />
-            <element signature="method#pickActiveHead#0;class#FlunkTheTeacherThread#0;class#GameView#0" expanded="false" />
-            <element signature="method#detectHeadContact#0;class#FlunkTheTeacherThread#0;class#GameView#0" expanded="false" />
-            <element signature="method#animateHeads#0;class#FlunkTheTeacherThread#0;class#GameView#0" expanded="false" />
-            <element signature="e#27366#27367#0" expanded="true" />
-            <element signature="e#27415#27416#0" expanded="true" />
-            <element signature="e#27844#27845#0" expanded="true" />
-            <element signature="e#27884#27885#0" expanded="true" />
+            <element signature="e#2727#2728#0" expanded="true" />
+            <element signature="e#2756#2757#0" expanded="true" />
+            <element signature="e#2763#2795#1" expanded="true" />
+            <element signature="e#14402#14403#0" expanded="true" />
+            <element signature="e#14437#14438#0" expanded="true" />
+            <element signature="e#29552#29553#0" expanded="true" />
+            <element signature="e#29601#29602#0" expanded="true" />
+            <element signature="e#30030#30031#0" expanded="true" />
+            <element signature="e#30070#30071#0" expanded="true" />
           </folding>
         </state>
       </provider>

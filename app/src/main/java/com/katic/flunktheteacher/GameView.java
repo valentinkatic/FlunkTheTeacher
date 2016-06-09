@@ -29,6 +29,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap scoreButtonDown;
     private Bitmap settingsButtonUp;
     private Bitmap settingsButtonDown;
+    private boolean playButtonPressed = false;
+    private boolean scoreButtonPressed = false;
+    private boolean settingsButtonPressed = false;
 
     private int screenW = 1;
     private int screenH = 1;
@@ -137,12 +140,38 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 canvas.drawBitmap(backgroundImg, 0, 0, null);
 
                 if (onTitle) {
-                    canvas.drawBitmap(playButtonDown, (int) 194 * drawScaleW, (int) 1008 * drawScaleH, null);
-                    canvas.drawBitmap(scoreButtonDown, (int) 194 * drawScaleW, (int) 1260 * drawScaleH, null);
-                    canvas.drawBitmap(settingsButtonDown, (int) 194 * drawScaleW, (int) 1520 * drawScaleH, null);
-                    canvas.drawBitmap(playButtonUp, (int) 194 * drawScaleW, (int) 1008 * drawScaleH, null);
-                    canvas.drawBitmap(scoreButtonUp, (int) 194 * drawScaleW, (int) 1260 * drawScaleH, null);
-                    canvas.drawBitmap(settingsButtonUp, (int) 194 * drawScaleW, (int) 1520 * drawScaleH, null);
+                    if (playButtonPressed) {
+                        canvas.drawBitmap(playButtonDown,
+                                (int) 194 * drawScaleW, (int) 1008 * drawScaleH, null);
+
+                        backgroundImg = BitmapFactory.decodeResource(
+                                myContext.getResources(), R.drawable.background);
+                        backgroundImg = Bitmap.createScaledBitmap(
+                                backgroundImg, screenW, screenH, true);
+                        loadMasks();
+
+                        onTitle = false;
+                        pickActiveHead();
+                    } else {
+                        canvas.drawBitmap(playButtonUp,
+                                (int) 172 * drawScaleW, (int) 986 * drawScaleH, null);
+                    }
+
+                    if (scoreButtonPressed) {
+                        canvas.drawBitmap(scoreButtonDown,
+                                (int) 194 * drawScaleW, (int) 1260 * drawScaleH, null);
+                    } else {
+                        canvas.drawBitmap(scoreButtonUp,
+                                (int) 172 * drawScaleW, (int) 1238 * drawScaleH, null);
+                    }
+
+                    if (settingsButtonPressed) {
+                        canvas.drawBitmap(settingsButtonDown,
+                                (int) 194 * drawScaleW, (int) 1520 * drawScaleH, null);
+                    } else {
+                        canvas.drawBitmap(settingsButtonUp,
+                                (int) 172 * drawScaleW, (int) 1498 * drawScaleH, null);
+                    }
                 }
 
                 if (!onTitle) {
@@ -179,6 +208,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                             (gameOverDialog.getWidth() / 2), (screenH / 2) -
                             (gameOverDialog.getHeight() / 2), null);
                 }
+
             } catch (Exception e) {
 
             }
@@ -207,23 +237,37 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                                 headsWhacked++;
                             }
                         }
+                        if (onTitle) {
+                            if (X > (screenW - playButtonUp.getWidth()) / 2 &&
+                                    X < ((screenW - playButtonUp.getWidth() / 2) + playButtonUp.getWidth()) &&
+                                    Y > (int) ((int) 1008 * drawScaleH) &&
+                                    Y < (int) ((int) 1008 * drawScaleH) + playButtonUp.getHeight()) {
+                                playButtonPressed = true;
+                            }
+                            if (X > (screenW - scoreButtonUp.getWidth()) / 2 &&
+                                    X < ((screenW - scoreButtonUp.getWidth() / 2) + scoreButtonUp.getWidth()) &&
+                                    Y > (int) ((int) 1260 * drawScaleH) &&
+                                    Y < (int) ((int) 1260 * drawScaleH) + scoreButtonUp.getHeight()) {
+                                scoreButtonPressed = true;
+                                //onTitle = false;
+                            }
+                            if (X > (screenW - settingsButtonUp.getWidth()) / 2 &&
+                                    X < ((screenW - settingsButtonUp.getWidth() / 2) + settingsButtonUp.getWidth()) &&
+                                    Y > (int) ((int) 1520 * drawScaleH) &&
+                                    Y < (int) ((int) 1520 * drawScaleH) + settingsButtonUp.getHeight()) {
+                                settingsButtonPressed = true;
+                                //onTitle = false;
+                            }
+                        }
                         break;
 
                     case MotionEvent.ACTION_MOVE:
                         break;
 
                     case MotionEvent.ACTION_UP:
-                        if (onTitle) {
-                            backgroundImg = BitmapFactory.decodeResource(
-                                    myContext.getResources(), R.drawable.background);
-                            backgroundImg = Bitmap.createScaledBitmap(
-                                    backgroundImg, screenW, screenH, true);
-                            loadMasks();
-                            setScaleSize();
-
-                            onTitle = false;
-                            pickActiveHead();
-                        }
+                        playButtonPressed = false;
+                        scoreButtonPressed = false;
+                        settingsButtonPressed = false;
                         whacking = false;
                         if (gameOver) {
                             headsWhacked = 0;
@@ -330,9 +374,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                     (myContext.getResources(), R.drawable.whack);
             gameOverDialog = BitmapFactory.decodeResource
                     (myContext.getResources(), R.drawable.gameover);
-        }
 
-        private void setScaleSize() {
             /*The createScaledBitmap() method allows us to create new
             bitmaps for your mask and mole images by multiplying their original
             width and height by the image scaling factor.*/
