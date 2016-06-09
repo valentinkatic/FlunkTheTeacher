@@ -25,6 +25,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private Bitmap playButtonUp;
     private Bitmap playButtonDown;
+    private Bitmap scoreButtonUp;
+    private Bitmap scoreButtonDown;
+    private Bitmap settingsButtonUp;
+    private Bitmap settingsButtonDown;
 
     private int screenW = 1;
     private int screenH = 1;
@@ -47,7 +51,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private int activeHead = 0;
     private boolean headRising = true;
     private boolean headSinking = false;
-    private int headRate = 1;
+    private int headRate = 2;
     private boolean headJustHit = false;
 
     private Bitmap whack;
@@ -93,7 +97,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             mySurfaceHolder = surfaceHolder;
             myContext = context;
             backgroundImg = BitmapFactory.decodeResource(context.getResources(), R.drawable.title);
+
             playButtonUp = BitmapFactory.decodeResource(getResources(), R.drawable.play_button_up);
+            playButtonDown = BitmapFactory.decodeResource(getResources(), R.drawable.play_button_down);
+            scoreButtonDown = BitmapFactory.decodeResource(getResources(), R.drawable.score_button_down);
+            scoreButtonUp = BitmapFactory.decodeResource(getResources(), R.drawable.score_button_up);
+            settingsButtonDown = BitmapFactory.decodeResource(getResources(), R.drawable.settings_button_down);
+            settingsButtonUp = BitmapFactory.decodeResource(getResources(), R.drawable.settings_button_up);
 
             backgroundOrigW = backgroundImg.getWidth();
             backgroundOrigH = backgroundImg.getHeight();
@@ -125,6 +135,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         private void draw(Canvas canvas) {
             try {
                 canvas.drawBitmap(backgroundImg, 0, 0, null);
+
+                if (onTitle) {
+                    canvas.drawBitmap(playButtonDown, (int) 194 * drawScaleW, (int) 1008 * drawScaleH, null);
+                    canvas.drawBitmap(scoreButtonDown, (int) 194 * drawScaleW, (int) 1260 * drawScaleH, null);
+                    canvas.drawBitmap(settingsButtonDown, (int) 194 * drawScaleW, (int) 1520 * drawScaleH, null);
+                    canvas.drawBitmap(playButtonUp, (int) 194 * drawScaleW, (int) 1008 * drawScaleH, null);
+                    canvas.drawBitmap(scoreButtonUp, (int) 194 * drawScaleW, (int) 1260 * drawScaleH, null);
+                    canvas.drawBitmap(settingsButtonUp, (int) 194 * drawScaleW, (int) 1520 * drawScaleH, null);
+                }
 
                 if (!onTitle) {
                     canvas.drawBitmap(head, head1x, head1y, null);
@@ -199,77 +218,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                                     myContext.getResources(), R.drawable.background);
                             backgroundImg = Bitmap.createScaledBitmap(
                                     backgroundImg, screenW, screenH, true);
-                            mask = BitmapFactory.decodeResource(
-                                    myContext.getResources(), R.drawable.mask);
-                            mask2 = BitmapFactory.decodeResource(
-                                    myContext.getResources(), R.drawable.mask2);
-                            mask3 = BitmapFactory.decodeResource(
-                                    myContext.getResources(), R.drawable.mask3);
-                            mask4 = BitmapFactory.decodeResource(
-                                    myContext.getResources(), R.drawable.mask4);
-                            mask5 = BitmapFactory.decodeResource(
-                                    myContext.getResources(), R.drawable.mask5);
-                            mask6 = BitmapFactory.decodeResource(
-                                    myContext.getResources(), R.drawable.mask6);
-                            mask7 = BitmapFactory.decodeResource(
-                                    myContext.getResources(), R.drawable.mask7);
-                            mask8 = BitmapFactory.decodeResource(
-                                    myContext.getResources(), R.drawable.mask8);
-                            mask9 = BitmapFactory.decodeResource(
-                                    myContext.getResources(), R.drawable.mask9);
-                            head = BitmapFactory.decodeResource(
-                                    myContext.getResources(), R.drawable.head);
-                            whack = BitmapFactory.decodeResource
-                                    (myContext.getResources(), R.drawable.whack);
-                            gameOverDialog = BitmapFactory.decodeResource
-                                    (myContext.getResources(), R.drawable.gameover);
-
-                            /*These lines determine the scaling variables you’ll use to resize
-                            images based on how much you scaled the background. You just
-                            divide the screen width/height of whatever device you’re on by
-                            the original width/height of your background image.*/
-                            scaleW = (float) screenW / (float) backgroundOrigW;
-                            scaleH = (float) screenH / (float) backgroundOrigH;
-
-                            /*The createScaledBitmap() method allows us to create new
-                            bitmaps for your mask and mole images by multiplying their original
-                            width and height by the image scaling factor.*/
-                            mask = Bitmap.createScaledBitmap(mask,
-                                    (int) (mask.getWidth() * scaleW),
-                                    (int) (mask.getHeight() * scaleH), true);
-                            mask2 = Bitmap.createScaledBitmap(mask2,
-                                    (int) (mask2.getWidth() * scaleW),
-                                    (int) (mask2.getHeight() * scaleH), true);
-                            mask3 = Bitmap.createScaledBitmap(mask3,
-                                    (int) (mask3.getWidth() * scaleW),
-                                    (int) (mask3.getHeight() * scaleH), true);
-                            mask4 = Bitmap.createScaledBitmap(mask4,
-                                    (int) (mask4.getWidth() * scaleW),
-                                    (int) (mask4.getHeight() * scaleH), true);
-                            mask5 = Bitmap.createScaledBitmap(mask5,
-                                    (int) (mask5.getWidth() * scaleW),
-                                    (int) (mask5.getHeight() * scaleH), true);
-                            mask6 = Bitmap.createScaledBitmap(mask6,
-                                    (int) (mask6.getWidth() * scaleW),
-                                    (int) (mask6.getHeight() * scaleH), true);
-                            mask7 = Bitmap.createScaledBitmap(mask7,
-                                    (int) (mask7.getWidth() * scaleW),
-                                    (int) (mask7.getHeight() * scaleH), true);
-                            mask8 = Bitmap.createScaledBitmap(mask8,
-                                    (int) (mask8.getWidth() * scaleW),
-                                    (int) (mask8.getHeight() * scaleH), true);
-                            mask9 = Bitmap.createScaledBitmap(mask9,
-                                    (int) (mask9.getWidth() * scaleW),
-                                    (int) (mask9.getHeight() * scaleH), true);
-                            head = Bitmap.createScaledBitmap(head,
-                                    (int) (head.getWidth() * scaleW),
-                                    (int) (head.getHeight() * scaleH), true);
-                            whack = Bitmap.createScaledBitmap(whack,
-                                    (int) (whack.getWidth() * scaleW),
-                                    (int) (whack.getHeight() * scaleH), true);
-                            gameOverDialog = Bitmap.createScaledBitmap
-                                    (gameOverDialog, (int) (gameOverDialog.getWidth() * scaleW),
-                                            (int) (gameOverDialog.getHeight() * scaleH), true);
+                            loadMasks();
+                            setScaleSize();
 
                             onTitle = false;
                             pickActiveHead();
@@ -322,11 +272,106 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 blackPaint.setStyle(Paint.Style.STROKE);
                 blackPaint.setTextAlign(Paint.Align.LEFT);
                 blackPaint.setTextSize(drawScaleW * 40);
+
+                scaleW = (float) screenW / (float) backgroundOrigW;
+                scaleH = (float) screenH / (float) backgroundOrigH;
+
+                scaleButtons();
             }
         }
 
         public void setRunning(boolean b) {
             running = b;
+        }
+
+        private void scaleButtons() {
+            playButtonDown = Bitmap.createScaledBitmap(playButtonDown,
+                    (int) (playButtonDown.getWidth() * scaleW),
+                    (int) (playButtonDown.getHeight() * scaleH), true);
+            playButtonUp = Bitmap.createScaledBitmap(playButtonUp,
+                    (int) (playButtonUp.getWidth() * scaleW),
+                    (int) (playButtonUp.getHeight() * scaleH), true);
+            scoreButtonDown = Bitmap.createScaledBitmap(scoreButtonDown,
+                    (int) (scoreButtonDown.getWidth() * scaleW),
+                    (int) (scoreButtonDown.getHeight() * scaleH), true);
+            scoreButtonUp = Bitmap.createScaledBitmap(scoreButtonUp,
+                    (int) (scoreButtonUp.getWidth() * scaleW),
+                    (int) (scoreButtonUp.getHeight() * scaleH), true);
+            settingsButtonDown = Bitmap.createScaledBitmap(settingsButtonDown,
+                    (int) (settingsButtonDown.getWidth() * scaleW),
+                    (int) (settingsButtonDown.getHeight() * scaleH), true);
+            settingsButtonUp = Bitmap.createScaledBitmap(settingsButtonUp,
+                    (int) (settingsButtonUp.getWidth() * scaleW),
+                    (int) (settingsButtonUp.getHeight() * scaleH), true);
+        }
+
+        private void loadMasks() {
+            mask = BitmapFactory.decodeResource(
+                    myContext.getResources(), R.drawable.mask);
+            mask2 = BitmapFactory.decodeResource(
+                    myContext.getResources(), R.drawable.mask2);
+            mask3 = BitmapFactory.decodeResource(
+                    myContext.getResources(), R.drawable.mask3);
+            mask4 = BitmapFactory.decodeResource(
+                    myContext.getResources(), R.drawable.mask4);
+            mask5 = BitmapFactory.decodeResource(
+                    myContext.getResources(), R.drawable.mask5);
+            mask6 = BitmapFactory.decodeResource(
+                    myContext.getResources(), R.drawable.mask6);
+            mask7 = BitmapFactory.decodeResource(
+                    myContext.getResources(), R.drawable.mask7);
+            mask8 = BitmapFactory.decodeResource(
+                    myContext.getResources(), R.drawable.mask8);
+            mask9 = BitmapFactory.decodeResource(
+                    myContext.getResources(), R.drawable.mask9);
+            head = BitmapFactory.decodeResource(
+                    myContext.getResources(), R.drawable.head);
+            whack = BitmapFactory.decodeResource
+                    (myContext.getResources(), R.drawable.whack);
+            gameOverDialog = BitmapFactory.decodeResource
+                    (myContext.getResources(), R.drawable.gameover);
+        }
+
+        private void setScaleSize() {
+            /*The createScaledBitmap() method allows us to create new
+            bitmaps for your mask and mole images by multiplying their original
+            width and height by the image scaling factor.*/
+            mask = Bitmap.createScaledBitmap(mask,
+                    (int) (mask.getWidth() * scaleW),
+                    (int) (mask.getHeight() * scaleH), true);
+            mask2 = Bitmap.createScaledBitmap(mask2,
+                    (int) (mask2.getWidth() * scaleW),
+                    (int) (mask2.getHeight() * scaleH), true);
+            mask3 = Bitmap.createScaledBitmap(mask3,
+                    (int) (mask3.getWidth() * scaleW),
+                    (int) (mask3.getHeight() * scaleH), true);
+            mask4 = Bitmap.createScaledBitmap(mask4,
+                    (int) (mask4.getWidth() * scaleW),
+                    (int) (mask4.getHeight() * scaleH), true);
+            mask5 = Bitmap.createScaledBitmap(mask5,
+                    (int) (mask5.getWidth() * scaleW),
+                    (int) (mask5.getHeight() * scaleH), true);
+            mask6 = Bitmap.createScaledBitmap(mask6,
+                    (int) (mask6.getWidth() * scaleW),
+                    (int) (mask6.getHeight() * scaleH), true);
+            mask7 = Bitmap.createScaledBitmap(mask7,
+                    (int) (mask7.getWidth() * scaleW),
+                    (int) (mask7.getHeight() * scaleH), true);
+            mask8 = Bitmap.createScaledBitmap(mask8,
+                    (int) (mask8.getWidth() * scaleW),
+                    (int) (mask8.getHeight() * scaleH), true);
+            mask9 = Bitmap.createScaledBitmap(mask9,
+                    (int) (mask9.getWidth() * scaleW),
+                    (int) (mask9.getHeight() * scaleH), true);
+            head = Bitmap.createScaledBitmap(head,
+                    (int) (head.getWidth() * scaleW),
+                    (int) (head.getHeight() * scaleH), true);
+            whack = Bitmap.createScaledBitmap(whack,
+                    (int) (whack.getWidth() * scaleW),
+                    (int) (whack.getHeight() * scaleH), true);
+            gameOverDialog = Bitmap.createScaledBitmap
+                    (gameOverDialog, (int) (gameOverDialog.getWidth() * scaleW),
+                            (int) (gameOverDialog.getHeight() * scaleH), true);
         }
 
         private void pickActiveHead() {
@@ -340,7 +385,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                     sounds.play(missSound, volume, volume, 1, 0, 1);
                 }
                 headsMissed++;
-                if (headsMissed >= 15) {
+                if (headsMissed >= 5) {
                     gameOver = true;
                 }
             }
@@ -348,7 +393,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             headRising = true;
             headSinking = false;
             headJustHit = false;
-            headRate = 1 + (int) (headsWhacked / 10);
+            headRate = 2 + (int) (headsWhacked / 10);
         }
 
         private boolean detectHeadContact() {
