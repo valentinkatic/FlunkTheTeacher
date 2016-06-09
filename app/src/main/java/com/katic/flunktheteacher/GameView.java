@@ -125,11 +125,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         private void draw(Canvas canvas) {
             try {
                 canvas.drawBitmap(backgroundImg, 0, 0, null);
-                playButtonDown = Bitmap.createScaledBitmap(playButtonDown,
-                        (int) (playButtonDown.getWidth() * scaleW),
-                        (int) (playButtonDown.getHeight() * scaleH), true);
-                canvas.drawBitmap(playButtonDown, (int) 194 * drawScaleW, (int) 1008 * drawScaleH, null);
-
 
                 if (!onTitle) {
                     canvas.drawBitmap(head, head1x, head1y, null);
