@@ -1,7 +1,9 @@
 package com.katic.flunktheteacher;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -12,17 +14,18 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
 import java.util.Random;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
@@ -84,7 +87,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public boolean soundOn = false;
 
     private boolean gameOver = false;
-    private Bitmap gameOverDialog;
+
+    private SharedPreferences prefs;
+    private String[] score;
+    private String nickname;
+    private int brojac = 0;
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -129,6 +136,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             sounds = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
             whackSound = sounds.load(myContext, R.raw.whack, 1);
             missSound = sounds.load(myContext, R.raw.miss, 1);
+
+            prefs = PreferenceManager.getDefaultSharedPreferences(myContext);
+
         }
 
         @Override
@@ -278,14 +288,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                             pickActiveHead();
                         }
 
-                        scoreButtonPressed = false;
+                        if (scoreButtonPressed) {
+                            showScoreDialog();
+                            scoreButtonPressed = false;
+                        }
+
                         settingsButtonPressed = false;
                         whacking = false;
                         if (gameOver) {
-                            showAlertDialog();
-                            headsWhacked = 0;
-                            headsMissed = 0;
                             activeHead = 0;
+                            showAlertDialog();
                             gameOver = false;
                         }
                         break;
@@ -396,8 +408,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                     myContext.getResources(), R.drawable.head);
             whack = BitmapFactory.decodeResource
                     (myContext.getResources(), R.drawable.whack);
-            gameOverDialog = BitmapFactory.decodeResource
-                    (myContext.getResources(), R.drawable.gameover);
 
             /*The createScaledBitmap() method allows us to create new
             bitmaps for your mask and mole images by multiplying their original
@@ -435,9 +445,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             whack = Bitmap.createScaledBitmap(whack,
                     (int) (whack.getWidth() * scaleW),
                     (int) (whack.getHeight() * scaleH), true);
-            gameOverDialog = Bitmap.createScaledBitmap
-                    (gameOverDialog, (int) (gameOverDialog.getWidth() * scaleW),
-                            (int) (gameOverDialog.getHeight() * scaleH), true);
         }
 
         public void showAlertDialog() {
@@ -468,7 +475,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                             myContext.getResources(), R.drawable.title);
                     backgroundImg = Bitmap.createScaledBitmap(
                             backgroundImg, screenW, screenH, true);
+
+                    enterScore(editText.getText().toString());
+
                     onTitle = true;
+                    headsWhacked = 0;
+                    headsMissed = 0;
                     d.dismiss();
                 }
             });
@@ -476,12 +488,79 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             playAgain.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    enterScore(editText.getText().toString());
+
                     d.dismiss();
+                    headsWhacked = 0;
+                    headsMissed = 0;
                     pickActiveHead();
                 }
             });
 
             d.show();
+        }
+
+        private void enterScore(String nickname) {
+            if (nickname.equals("")) nickname = "No name";
+            SharedPreferences.Editor editor = prefs.edit();
+            int tempBrojac = prefs.getInt("brojac", 0);
+            if (tempBrojac < 10) {
+                tempBrojac++;
+                editor.putInt("brojac", tempBrojac);
+                editor.putString("nickname" + tempBrojac, nickname);
+                editor.putInt("score" + tempBrojac, headsWhacked);
+                editor.commit();
+                if (tempBrojac > 1) {
+                    arrange();
+                }
+            } else if (tempBrojac >= 10) {
+                for (int i = 10; i > 0; i--) {
+                    if (prefs.getInt("score" + i, 0) < headsWhacked) {
+                        int tempScore = prefs.getInt("score" + i, 0);
+                        String tempNick = prefs.getString("nickname" + i, "No name");
+                        editor.putString("nickname" + i, nickname);
+                        editor.putInt("score" + i, headsWhacked);
+                        editor.putString("nickname" + (i + 1), tempNick);
+                        editor.putInt("score" + (i + 1), tempScore);
+                        editor.commit();
+                    }
+                }
+            }
+        }
+
+        private void arrange() {
+            SharedPreferences.Editor editor = prefs.edit();
+            brojac = prefs.getInt("brojac", 0);
+            for (int i = brojac - 1; i > 0; i--) {
+                if (prefs.getInt("score" + i, 0) < prefs.getInt("score" + (i + 1), 0)) {
+                    int tempScore = prefs.getInt("score" + i, 0);
+                    String tempNick = prefs.getString("nickname" + i, "No name");
+                    editor.putString("nickname" + i, prefs.getString("nickname" + (i + 1), "No name"));
+                    editor.putInt("score" + i, prefs.getInt("score" + (i + 1), 0));
+                    editor.putString("nickname" + (i + 1), tempNick);
+                    editor.putInt("score" + (i + 1), tempScore);
+                    editor.commit();
+                }
+            }
+        }
+
+        public void showScoreDialog() {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
+            ListView modeList = new ListView(myContext);
+            brojac = prefs.getInt("brojac", 0);
+            score = new String[brojac];
+            for (int i = 0; i < brojac; i++) {
+                score[i] = prefs.getString("nickname" + (i + 1), "No name") + " " + prefs.getInt("score" + (i + 1), 0);
+            }
+            ArrayAdapter<String> modeAdapter = new ArrayAdapter<String>(myContext, android.R.layout.simple_list_item_1, android.R.id.text1, score);
+
+            modeList.setAdapter(modeAdapter);
+
+            builder.setView(modeList);
+            final Dialog dialog = builder.create();
+
+            dialog.show();
         }
 
         private void pickActiveHead() {

@@ -1,6 +1,9 @@
 package com.katic.flunktheteacher;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int TOGGLE_SOUND = 1;
     private boolean soundEnabled = true;
+    public int score;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         gameView.setKeepScreenOn(true);
 
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
