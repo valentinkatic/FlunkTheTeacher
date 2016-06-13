@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:src="@drawable/gameover"
+        android:scaleType="fitXY"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignTop="@+id/dialog_layout_main"
+        android:layout_alignBottom="@id/dialog_layout_main"
+        android:layout_alignLeft="@id/dialog_layout_main"
+        android:layout_alignRight="@id/dialog_layout_main" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@id/dialog_layout_main">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText" />
+
+        <ImageButton
+            android:id="@+id/main_menu"
+            android:layout_width="105dp"
+            android:layout_height="30dp"
+            android:text="Main Menu"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/main_menu_button" />
+
+
+        <ImageButton
+            android:layout_width="105dp"
+            android:layout_height="30dp"
+            android:text="Play Again"
+            android:id="@+id/play_again"
+            android:background="@drawable/play_again_button"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

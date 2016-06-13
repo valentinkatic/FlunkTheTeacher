@@ -1,11 +1,13 @@
 package com.katic.flunktheteacher;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Handler;
@@ -14,6 +16,12 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.Window;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -32,6 +40,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private boolean playButtonPressed = false;
     private boolean scoreButtonPressed = false;
     private boolean settingsButtonPressed = false;
+    private Bitmap playAgainButtonUp;
+    private Bitmap playAgainButtonDown;
+    private Bitmap mainMenuButtonUp;
+    private Bitmap mainMenuButtonDown;
 
     private int screenW = 1;
     private int screenH = 1;
@@ -107,6 +119,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             scoreButtonUp = BitmapFactory.decodeResource(getResources(), R.drawable.score_button_up);
             settingsButtonDown = BitmapFactory.decodeResource(getResources(), R.drawable.settings_button_down);
             settingsButtonUp = BitmapFactory.decodeResource(getResources(), R.drawable.settings_button_up);
+            playAgainButtonDown = BitmapFactory.decodeResource(getResources(), R.drawable.play_again_button_down);
+            playAgainButtonUp = BitmapFactory.decodeResource(getResources(), R.drawable.play_again_button_up);
+            mainMenuButtonDown = BitmapFactory.decodeResource(getResources(), R.drawable.main_menu_down);
+            mainMenuButtonUp = BitmapFactory.decodeResource(getResources(), R.drawable.main_menu_up);
 
             backgroundOrigW = backgroundImg.getWidth();
             backgroundOrigH = backgroundImg.getHeight();
@@ -138,20 +154,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         private void draw(Canvas canvas) {
             try {
                 canvas.drawBitmap(backgroundImg, 0, 0, null);
-
                 if (onTitle) {
                     if (playButtonPressed) {
                         canvas.drawBitmap(playButtonDown,
                                 (int) 194 * drawScaleW, (int) 1008 * drawScaleH, null);
-
-                        backgroundImg = BitmapFactory.decodeResource(
-                                myContext.getResources(), R.drawable.background);
-                        backgroundImg = Bitmap.createScaledBitmap(
-                                backgroundImg, screenW, screenH, true);
-                        loadMasks();
-
-                        onTitle = false;
-                        pickActiveHead();
                     } else {
                         canvas.drawBitmap(playButtonUp,
                                 (int) 172 * drawScaleW, (int) 986 * drawScaleH, null);
@@ -202,11 +208,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 if (whacking) {
                     canvas.drawBitmap(whack, fingerX - (whack.getWidth() / 2),
                             fingerY - (whack.getHeight() / 2), null);
-                }
-                if (gameOver) {
-                    canvas.drawBitmap(gameOverDialog, (screenW / 2) -
-                            (gameOverDialog.getWidth() / 2), (screenH / 2) -
-                            (gameOverDialog.getHeight() / 2), null);
                 }
 
             } catch (Exception e) {
@@ -259,21 +260,32 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                                 //onTitle = false;
                             }
                         }
+
                         break;
 
                     case MotionEvent.ACTION_MOVE:
                         break;
 
                     case MotionEvent.ACTION_UP:
-                        playButtonPressed = false;
+                        if (playButtonPressed) {
+                            backgroundImg = BitmapFactory.decodeResource(
+                                    myContext.getResources(), R.drawable.background);
+                            backgroundImg = Bitmap.createScaledBitmap(
+                                    backgroundImg, screenW, screenH, true);
+                            loadMasks();
+                            onTitle = false;
+                            playButtonPressed = false;
+                            pickActiveHead();
+                        }
+
                         scoreButtonPressed = false;
                         settingsButtonPressed = false;
                         whacking = false;
                         if (gameOver) {
+                            showAlertDialog();
                             headsWhacked = 0;
                             headsMissed = 0;
                             activeHead = 0;
-                            pickActiveHead();
                             gameOver = false;
                         }
                         break;
@@ -347,6 +359,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             settingsButtonUp = Bitmap.createScaledBitmap(settingsButtonUp,
                     (int) (settingsButtonUp.getWidth() * scaleW),
                     (int) (settingsButtonUp.getHeight() * scaleH), true);
+            playAgainButtonDown = Bitmap.createScaledBitmap(playAgainButtonDown,
+                    (int) (playAgainButtonDown.getWidth() * scaleW * 0.5625),
+                    (int) (playAgainButtonDown.getHeight() * scaleH * 0.5625), true);
+            playAgainButtonUp = Bitmap.createScaledBitmap(playAgainButtonUp,
+                    (int) (playAgainButtonUp.getWidth() * scaleW * 0.5625),
+                    (int) (playAgainButtonUp.getHeight() * scaleH * 0.5625), true);
+            mainMenuButtonDown = Bitmap.createScaledBitmap(mainMenuButtonDown,
+                    (int) (mainMenuButtonDown.getWidth() * scaleW * 0.5625),
+                    (int) (mainMenuButtonDown.getHeight() * scaleH * 0.5625), true);
+            mainMenuButtonUp = Bitmap.createScaledBitmap(mainMenuButtonUp,
+                    (int) (mainMenuButtonUp.getWidth() * scaleW * 0.5625),
+                    (int) (mainMenuButtonUp.getHeight() * scaleH * 0.5625), true);
         }
 
         private void loadMasks() {
@@ -416,6 +440,48 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                             (int) (gameOverDialog.getHeight() * scaleH), true);
         }
 
+        public void showAlertDialog() {
+
+            final Dialog d = new Dialog(myContext);
+            d.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            d.setContentView(R.layout.alertdialog);
+
+            d.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+            final ImageButton mainMenu = (ImageButton) d.findViewById(R.id.main_menu);
+            final ImageButton playAgain = (ImageButton) d.findViewById(R.id.play_again);
+            final EditText editText = (EditText) d.findViewById(R.id.editText);
+
+            RelativeLayout.LayoutParams paramsText = (RelativeLayout.LayoutParams) editText.getLayoutParams();
+            paramsText.setMargins((int) (300 * scaleW), (int) (470 * scaleH), (int) (300 * scaleW), 0);
+            RelativeLayout.LayoutParams paramsMain = (RelativeLayout.LayoutParams) mainMenu.getLayoutParams();
+            paramsMain.setMargins((int) (180 * scaleW), (int) (807 * scaleH), 0, (int) (120 * scaleH));
+            RelativeLayout.LayoutParams paramsPlay = (RelativeLayout.LayoutParams) playAgain.getLayoutParams();
+            paramsPlay.setMargins(0, (int) (807 * scaleH), (int) (180 * scaleW), (int) (120 * scaleH));
+
+            mainMenu.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    backgroundImg = BitmapFactory.decodeResource(
+                            myContext.getResources(), R.drawable.title);
+                    backgroundImg = Bitmap.createScaledBitmap(
+                            backgroundImg, screenW, screenH, true);
+                    onTitle = true;
+                    d.dismiss();
+                }
+            });
+
+            playAgain.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    d.dismiss();
+                    pickActiveHead();
+                }
+            });
+
+            d.show();
+        }
+
         private void pickActiveHead() {
             if (!headJustHit && activeHead > 0) {
                 if (soundOn) {
@@ -431,7 +497,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                     gameOver = true;
                 }
             }
-            activeHead = new Random().nextInt(7) + 1;
+            activeHead = new Random().nextInt(9) + 1;
             headRising = true;
             headSinking = false;
             headJustHit = false;
