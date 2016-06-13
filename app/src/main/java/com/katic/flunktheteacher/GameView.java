@@ -447,6 +447,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             d.setContentView(R.layout.alertdialog);
 
             d.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            d.setCancelable(false);
+            d.setCanceledOnTouchOutside(false);
 
             final ImageButton mainMenu = (ImageButton) d.findViewById(R.id.main_menu);
             final ImageButton playAgain = (ImageButton) d.findViewById(R.id.play_again);
