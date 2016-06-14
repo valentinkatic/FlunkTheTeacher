@@ -26,6 +26,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
 import java.util.Random;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
@@ -42,7 +44,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private Bitmap settingsButtonDown;
     private boolean playButtonPressed = false;
     private boolean scoreButtonPressed = false;
-    private boolean settingsButtonPressed = false;
+    private boolean soundButtonPressed = false;
     private Bitmap playAgainButtonUp;
     private Bitmap playAgainButtonDown;
     private Bitmap mainMenuButtonUp;
@@ -84,12 +86,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private static SoundPool sounds;
     private static int whackSound;
     private static int missSound;
-    public boolean soundOn = false;
+    public boolean soundOn = true;
 
     private boolean gameOver = false;
 
     private SharedPreferences prefs;
-    private String[] score;
     private String nickname;
     private int brojac = 0;
 
@@ -181,7 +182,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                                 (int) 172 * drawScaleW, (int) 1238 * drawScaleH, null);
                     }
 
-                    if (settingsButtonPressed) {
+                    if (soundButtonPressed) {
                         canvas.drawBitmap(settingsButtonDown,
                                 (int) 194 * drawScaleW, (int) 1520 * drawScaleH, null);
                     } else {
@@ -209,7 +210,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                     canvas.drawBitmap(mask7, (int) 164 * drawScaleW, (int) 1650 * drawScaleH, null);
                     canvas.drawBitmap(mask8, (int) 475 * drawScaleW, (int) 1650 * drawScaleH, null);
                     canvas.drawBitmap(mask9, (int) 786 * drawScaleW, (int) 1650 * drawScaleH, null);
-                    canvas.drawText("Whacked: " + Integer.toString(headsWhacked),
+                    canvas.drawText("Flunked: " + Integer.toString(headsWhacked),
                             10, blackPaint.getTextSize() + 10, blackPaint);
                     canvas.drawText("Missed: " + Integer.toString(headsMissed),
                             screenW - (int) (200 * drawScaleW),
@@ -266,7 +267,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                                     X < ((screenW - settingsButtonUp.getWidth() / 2) + settingsButtonUp.getWidth()) &&
                                     Y > (int) ((int) 1520 * drawScaleH) &&
                                     Y < (int) ((int) 1520 * drawScaleH) + settingsButtonUp.getHeight()) {
-                                settingsButtonPressed = true;
+                                if (soundButtonPressed) {
+                                    soundButtonPressed = false;
+                                    soundOn = true;
+                                    Toast.makeText(myContext, "Sound ON", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    soundButtonPressed = true;
+                                    soundOn = false;
+                                    Toast.makeText(myContext, "Sound OFF", Toast.LENGTH_SHORT).show();
+                                }
                                 //onTitle = false;
                             }
                         }
@@ -293,7 +302,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                             scoreButtonPressed = false;
                         }
 
-                        settingsButtonPressed = false;
                         whacking = false;
                         if (gameOver) {
                             activeHead = 0;
@@ -548,10 +556,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(myContext);
             ListView modeList = new ListView(myContext);
+            builder.setTitle("High Score");
             brojac = prefs.getInt("brojac", 0);
-            score = new String[brojac];
-            for (int i = 0; i < brojac; i++) {
-                score[i] = prefs.getString("nickname" + (i + 1), "No name") + " " + prefs.getInt("score" + (i + 1), 0);
+            String[] score = new String[brojac];
+            if (brojac == 0) {
+                score = new String[1];
+                score[0] = "No Data";
+            } else {
+                for (int i = 0; i < brojac; i++) {
+                    score[i] = prefs.getString("nickname" + (i + 1), "No name") + " " + prefs.getInt("score" + (i + 1), 0);
+                }
             }
             ArrayAdapter<String> modeAdapter = new ArrayAdapter<String>(myContext, android.R.layout.simple_list_item_1, android.R.id.text1, score);
 
@@ -582,79 +596,79 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             headRising = true;
             headSinking = false;
             headJustHit = false;
-            headRate = 2 + (int) (headsWhacked / 10);
+            headRate = 2 + (int) (headsWhacked / 15);
         }
 
         private boolean detectHeadContact() {
             boolean contact = false;
             if (activeHead == 1 &&
-                    fingerX >= head1x - (int) (150 * drawScaleW) &&
-                    fingerX < head1x + (int) (150 * drawScaleW) &&
-                    fingerY > head1y - (int) (50 * drawScaleH) &&
+                    fingerX >= head1x - (int) (200 * drawScaleW) &&
+                    fingerX < head1x + (int) (200 * drawScaleW) &&
+                    fingerY > head1y - (int) (100 * drawScaleH) &&
                     fingerY < (int) 900 * drawScaleH) {
                 contact = true;
                 headJustHit = true;
             }
             if (activeHead == 2 &&
-                    fingerX >= head2x - (int) (150 * drawScaleW) &&
-                    fingerX < head2x + (int) (150 * drawScaleW) &&
-                    fingerY > head2y - (int) (50 * drawScaleH) &&
+                    fingerX >= head2x - (int) (200 * drawScaleW) &&
+                    fingerX < head2x + (int) (200 * drawScaleW) &&
+                    fingerY > head2y - (int) (100 * drawScaleH) &&
                     fingerY < (int) 900 * drawScaleH) {
                 contact = true;
                 headJustHit = true;
             }
             if (activeHead == 3 &&
-                    fingerX >= head3x - (int) (150 * drawScaleW) &&
-                    fingerX < head3x + (int) (150 * drawScaleW) &&
-                    fingerY > head3y - (int) (50 * drawScaleH) &&
+                    fingerX >= head3x - (int) (200 * drawScaleW) &&
+                    fingerX < head3x + (int) (200 * drawScaleW) &&
+                    fingerY > head3y - (int) (100 * drawScaleH) &&
                     fingerY < (int) 900 * drawScaleH) {
                 contact = true;
                 headJustHit = true;
             }
             if (activeHead == 4 &&
-                    fingerX >= head4x - (int) (150 * drawScaleW) &&
-                    fingerX < head4x + (int) (150 * drawScaleW) &&
-                    fingerY > head4y - (int) (50 * drawScaleH) &&
+                    fingerX >= head4x - (int) (200 * drawScaleW) &&
+                    fingerX < head4x + (int) (200 * drawScaleW) &&
+                    fingerY > head4y - (int) (100 * drawScaleH) &&
                     fingerY < (int) 1273 * drawScaleH) {
                 contact = true;
                 headJustHit = true;
             }
             if (activeHead == 5 &&
-                    fingerX >= head5x - (int) (150 * drawScaleW) &&
-                    fingerX < head5x + (int) (150 * drawScaleW) &&
-                    fingerY > head5y - (int) (50 * drawScaleH) &&
+                    fingerX >= head5x - (int) (200 * drawScaleW) &&
+                    fingerX < head5x + (int) (200 * drawScaleW) &&
+                    fingerY > head5y - (int) (100 * drawScaleH) &&
                     fingerY < (int) 1273 * drawScaleH) {
                 contact = true;
                 headJustHit = true;
             }
             if (activeHead == 6 &&
-                    fingerX >= head6x - (int) (150 * drawScaleW) &&
-                    fingerX < head6x + (int) (150 * drawScaleW) &&
-                    fingerY > head6y - (int) (50 * drawScaleH) &&
+                    fingerX >= head6x - (int) (200 * drawScaleW) &&
+                    fingerX < head6x + (int) (200 * drawScaleW) &&
+                    fingerY > head6y - (int) (100 * drawScaleH) &&
                     fingerY < (int) 1273 * drawScaleH) {
                 contact = true;
                 headJustHit = true;
             }
             if (activeHead == 7 &&
-                    fingerX >= head7x - (int) (150 * drawScaleW) &&
-                    fingerX < head7x + (int) (150 * drawScaleW) &&
-                    fingerY > head7y - (int) (50 * drawScaleH) &&
+                    fingerX >= head7x - (int) (200 * drawScaleW) &&
+                    fingerX < head7x + (int) (200 * drawScaleW) &&
+                    fingerY > head7y - (int) (100 * drawScaleH) &&
                     fingerY < (int) 1650 * drawScaleH) {
                 contact = true;
                 headJustHit = true;
             }
             if (activeHead == 8 &&
-                    fingerX >= head8x - (int) (150 * drawScaleW) &&
-                    fingerX < head8x + (int) (150 * drawScaleW) &&
-                    fingerY > head8y - (int) (50 * drawScaleH) &&
+                    fingerX >= head8x - (int) (200 * drawScaleW) &&
+                    fingerX < head8x + (int) (200 * drawScaleW) &&
+                    fingerY > head8y - (int) (100 * drawScaleH) &&
                     fingerY < (int) 1650 * drawScaleH) {
                 contact = true;
                 headJustHit = true;
             }
             if (activeHead == 9 &&
-                    fingerX >= head9x - (int) (150 * drawScaleW) &&
-                    fingerX < head9x + (int) (150 * drawScaleW) &&
-                    fingerY > head9y - (int) (50 * drawScaleH) &&
+                    fingerX >= head9x - (int) (200 * drawScaleW) &&
+                    fingerX < head9x + (int) (200 * drawScaleW) &&
+                    fingerY > head9y - (int) (100 * drawScaleH) &&
                     fingerY < (int) 1650 * drawScaleH) {
                 contact = true;
                 headJustHit = true;
