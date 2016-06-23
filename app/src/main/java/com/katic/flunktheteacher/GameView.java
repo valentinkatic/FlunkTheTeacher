@@ -63,7 +63,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private float drawScaleW;
     private float drawScaleH;
     private Bitmap mask, mask2, mask3, mask4, mask5, mask6, mask7, mask8, mask9;
-    private Bitmap head;
+    private Bitmap[] head = new Bitmap[7];
 
     private int head1x, head2x, head3x, head4x, head5x, head6x, head7x, head8x, head9x;
     private int head1y, head2y, head3y, head4y, head5y, head6y, head7y, head8y, head9y;
@@ -93,6 +93,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private SharedPreferences prefs;
     private String nickname;
     private int brojac = 0;
+
+    int[] randomNum = new int[9];
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -192,15 +194,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 }
 
                 if (!onTitle) {
-                    canvas.drawBitmap(head, head1x, head1y, null);
-                    canvas.drawBitmap(head, head2x, head2y, null);
-                    canvas.drawBitmap(head, head3x, head3y, null);
-                    canvas.drawBitmap(head, head4x, head4y, null);
-                    canvas.drawBitmap(head, head5x, head5y, null);
-                    canvas.drawBitmap(head, head6x, head6y, null);
-                    canvas.drawBitmap(head, head7x, head7y, null);
-                    canvas.drawBitmap(head, head8x, head8y, null);
-                    canvas.drawBitmap(head, head9x, head9y, null);
+                    canvas.drawBitmap(head[randomNum[0]], head1x, head1y, null);
+                    canvas.drawBitmap(head[randomNum[1]], head2x, head2y, null);
+                    canvas.drawBitmap(head[randomNum[2]], head3x, head3y, null);
+                    canvas.drawBitmap(head[randomNum[3]], head4x, head4y, null);
+                    canvas.drawBitmap(head[randomNum[4]], head5x, head5y, null);
+                    canvas.drawBitmap(head[randomNum[5]], head6x, head6y, null);
+                    canvas.drawBitmap(head[randomNum[6]], head7x, head7y, null);
+                    canvas.drawBitmap(head[randomNum[7]], head8x, head8y, null);
+                    canvas.drawBitmap(head[randomNum[8]], head9x, head9y, null);
                     canvas.drawBitmap(mask, (int) 164 * drawScaleW, (int) 900 * drawScaleH, null);
                     canvas.drawBitmap(mask2, (int) 475 * drawScaleW, (int) 900 * drawScaleH, null);
                     canvas.drawBitmap(mask3, (int) 786 * drawScaleW, (int) 900 * drawScaleH, null);
@@ -254,6 +256,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                                     X < ((screenW - playButtonUp.getWidth() / 2) + playButtonUp.getWidth()) &&
                                     Y > (int) ((int) 1008 * drawScaleH) &&
                                     Y < (int) ((int) 1008 * drawScaleH) + playButtonUp.getHeight()) {
+                                for (int i = 0; i < 9; i++) {
+                                    randomNum[i] = new Random().nextInt(7);
+                                }
                                 playButtonPressed = true;
                             }
                             if (X > (screenW - scoreButtonUp.getWidth()) / 2 &&
@@ -261,7 +266,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                                     Y > (int) ((int) 1260 * drawScaleH) &&
                                     Y < (int) ((int) 1260 * drawScaleH) + scoreButtonUp.getHeight()) {
                                 scoreButtonPressed = true;
-                                //onTitle = false;
                             }
                             if (X > (screenW - settingsButtonUp.getWidth()) / 2 &&
                                     X < ((screenW - settingsButtonUp.getWidth() / 2) + settingsButtonUp.getWidth()) &&
@@ -305,6 +309,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                         whacking = false;
                         if (gameOver) {
                             activeHead = 0;
+                            for (int i = 0; i < 9; i++) {
+                                randomNum[i] = new Random().nextInt(7);
+                            }
                             showAlertDialog();
                             gameOver = false;
                         }
@@ -412,8 +419,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                     myContext.getResources(), R.drawable.mask8);
             mask9 = BitmapFactory.decodeResource(
                     myContext.getResources(), R.drawable.mask9);
-            head = BitmapFactory.decodeResource(
-                    myContext.getResources(), R.drawable.head);
+            head[0] = BitmapFactory.decodeResource(myContext.getResources(), R.drawable.head0);
+            head[1] = BitmapFactory.decodeResource(myContext.getResources(), R.drawable.head1);
+            head[2] = BitmapFactory.decodeResource(myContext.getResources(), R.drawable.head2);
+            head[3] = BitmapFactory.decodeResource(myContext.getResources(), R.drawable.head3);
+            head[4] = BitmapFactory.decodeResource(myContext.getResources(), R.drawable.head4);
+            head[5] = BitmapFactory.decodeResource(myContext.getResources(), R.drawable.head5);
+            head[6] = BitmapFactory.decodeResource(myContext.getResources(), R.drawable.head6);
             whack = BitmapFactory.decodeResource
                     (myContext.getResources(), R.drawable.whack);
 
@@ -447,9 +459,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             mask9 = Bitmap.createScaledBitmap(mask9,
                     (int) (mask9.getWidth() * scaleW),
                     (int) (mask9.getHeight() * scaleH), true);
-            head = Bitmap.createScaledBitmap(head,
-                    (int) (head.getWidth() * scaleW),
-                    (int) (head.getHeight() * scaleH), true);
+            for (int i = 0; i < 7; i++) {
+                head[i] = Bitmap.createScaledBitmap(head[i],
+                        (int) (head[i].getWidth() * scaleW),
+                        (int) (head[i].getHeight() * scaleH), true);
+            }
             whack = Bitmap.createScaledBitmap(whack,
                     (int) (whack.getWidth() * scaleW),
                     (int) (whack.getHeight() * scaleH), true);
